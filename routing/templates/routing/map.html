@@ -44,7 +44,8 @@
   }).addTo(map);
 
   const line = L.polyline(plan.route.geometry.coordinates.map(c => [c[1], c[0]]), { color: "#2563eb", weight: 4 }).addTo(map);
-  map.fitBounds(line.getBounds(), { padding: [30, 30] });
+    // Leave room on the right so the summary panel doesn't cover the route's start.
+  map.fitBounds(line.getBounds(), { paddingTopLeft: [30, 30], paddingBottomRight: [340, 30] });
 
   const dot = (color) => ({ radius: 8, color: "#fff", weight: 2, fillColor: color, fillOpacity: 1 });
   L.circleMarker([plan.start.lat, plan.start.lon], dot("#16a34a")).addTo(map).bindPopup("Start: " + plan.start.label);
